@@ -17,7 +17,7 @@ const NavIcon = () => {
         setRoute(pathname); // / /search /new
     }, [pathname]);
     return (
-        <nav className='flex gap-2 items-center'>
+        <nav className='flex gap-4 items-center text-xl'>
             <Link href='/'>
                 {route === '/' ? <AiFillHome /> : <AiOutlineHome />}
             </Link>
@@ -28,7 +28,9 @@ const NavIcon = () => {
                 {route === '/new' ? <BsPlusSquareFill /> : <BsPlusSquare />}
             </Link>
             <Link href='/'>
-                <button className='border-2 p-3 border-orange-300'>Sign in</button>
+                <div className="text-base rounded-md p-[3px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                    <button className='p-1 bg-white'>Sign in</button>
+                </div>
             </Link>
         </nav>
     )
