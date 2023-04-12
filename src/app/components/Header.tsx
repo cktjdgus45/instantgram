@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import NavIcon from './NavIcon';
+import Nav from './Nav';
 
 const Header = () => {
     return (
@@ -8,7 +8,7 @@ const Header = () => {
             <Link href='/'>
                 <h1 className='font-extrabold text-2xl'>Instantgram</h1>
             </Link>
-            <NavIcon />
+            <Nav />
         </header>
     )
 }
