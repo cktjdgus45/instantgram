@@ -1,4 +1,5 @@
 import Header from './components/Header';
+import AuthContext from '../context/authContext';
 import './globals.css'
 import { Open_Sans } from 'next/font/google'
 
@@ -17,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={openSans.className}>
       <body>
-        <Header />
-        <main>
-          {children}
-        </main>
+        <AuthContext>
+          <Header />
+          <main>
+            {children}
+          </main>
+        </AuthContext>
       </body>
     </html>
   )
