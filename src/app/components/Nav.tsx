@@ -26,14 +26,12 @@ const menu = [
 ]
 
 const Nav = () => {
-    const BASE_URL = 'http://localhost:3000';
     const pathname = usePathname();
     const [route, setRoute] = useState('/');
     const { data: session } = useSession();
     useEffect(() => {
         setRoute(pathname ? pathname : '/'); // / /search /new
     }, [pathname]);
-    console.log(BASE_URL + pathname)
     return (
         <nav className='flex gap-4 items-center text-xl'>
             {menu.map(item => (
@@ -43,8 +41,8 @@ const Nav = () => {
                 session?.user ? <Profile name={session.user.email?.slice(0, 10)} image={session.user.image} /> : null
             }
             {
-                session ? <LoginButton text={'Sign Out'} onClick={() => signOut({ callbackUrl: BASE_URL + pathname })} />
-                    : <LoginButton text={'Sign In'} onClick={() => signIn()} />
+                session ? <LoginButton size='small' text={'Sign Out'} onClick={() => signOut()} />
+                    : <LoginButton size='small' text={'Sign In'} onClick={() => signIn()} />
             }
         </nav>
     )
