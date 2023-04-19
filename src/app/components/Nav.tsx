@@ -12,6 +12,7 @@ import NavIcon from './NavIcon';
 import LoginButton from './ui/LoginButton';
 import { useSession, signIn, signOut } from "next-auth/react";
 import Profile from './ui/Profile';
+import Link from 'next/link';
 
 const menu = [
     {
@@ -29,6 +30,7 @@ const Nav = () => {
     const pathname = usePathname();
     const [route, setRoute] = useState('/');
     const { data: session } = useSession();
+    const user = session?.user;
     useEffect(() => {
         setRoute(pathname ? pathname : '/'); // / /search /new
     }, [pathname]);
@@ -38,7 +40,11 @@ const Nav = () => {
                 <NavIcon key={item.href} currentRoute={route} menu={item} />
             ))}
             {
-                session?.user ? <Profile name={session.user.email?.slice(0, 10)} image={session.user.image} /> : null
+                user && (
+                    <Link href={`/user/${user.username}`}>
+                        <Profile image={user.image} />
+                    </Link>
+                )
             }
             {
                 session ? <LoginButton size='small' text={'Sign Out'} onClick={() => signOut()} />
