@@ -1,10 +1,9 @@
-import Image from 'next/image'
-
+import ContentBox from './components/ContentBox';
 
 export default function Home() {
   return (
-    <h1 className='text-red-400'>
-      home page
-    </h1>
+    <div>
+      <ContentBox />
+    </div>
   )
 }
