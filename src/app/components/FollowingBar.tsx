@@ -2,7 +2,7 @@ import React from 'react';
 
 const FollowingBar = () => {
     return (
-        <>following bar component</>
+        <h3>following bar component</h3>
     )
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 const PostList = () => {
     return (
-        <>post list component</>
+        <h3>post list component</h3>
     )
 }
 

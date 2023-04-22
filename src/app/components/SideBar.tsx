@@ -1,24 +1,24 @@
-'use client';
 import React from 'react';
 import Profile from './ui/Profile';
-import { useSession } from 'next-auth/react';
+import { User } from '@/model/user';
 
-const SideBar = () => {
-    const { data: session } = useSession();
-    const user = session?.user;
+type Props = {
+    user: User;
+}
 
+const SideBar = ({ user: { image, email, name, username } }: Props) => {
     return (
-        <div className='basis-4/12 bg-red-300 p-5'>
-            <div className='flex items-center gap-4'>
-                <Profile image={user?.image} size={'big'} gradient={false} name={user?.email?.split('@')[0]} />
-                <div>
-                    <h3 className='text-sm font-bold'>{user?.email?.split('@')[0]}</h3>
-                    <span className='text-gray-600 font-base'>{user?.name}</span>
+        <>
+            <div className='flex items-center'>
+                <Profile image={image && image} size={'big'} gradient={true} />
+                <div className='ml-4'>
+                    <p className='font-bold'>{username}</p>
+                    <p className='text-lg text-neutral-500 leading-4'>{name}</p>
                 </div>
             </div>
-            <p className='text-sm font-normal my-6 text-gray-600'>About · Help  · Press  · API · jobs<br /> ·Privacy ·Terms ·Location ·<br />Language</p>
-            <h2 className='text-sm font-bold text-gray-700'>@Copyright INSTANTGRAM from METAL</h2>
-        </div>
+            <p className='text-sm text-neutral-500 mt-8'>About · Help  · Press  · API · jobs ·Privacy ·Terms ·Location ·Language</p>
+            <p className='font-bold text-sm mt-8 text-neutral-500'>@Copyright INSTANTGRAM from METAL</p>
+        </>
     )
 }
 
