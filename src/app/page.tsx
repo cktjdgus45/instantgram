@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className='w-full flex justify-center'>
       <AuthenticateArea>
-        <div className='flex'>
+        <div className='flex w-[70%]'>
           <MainBar />
           <SideBar />
         </div>
