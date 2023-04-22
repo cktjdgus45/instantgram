@@ -1,8 +1,11 @@
 import React from 'react';
+import AuthenticateArea from '../components/AuthenticateArea';
 
 const NewPage = () => {
     return (
-        <>new post add page</>
+        <AuthenticateArea>
+            <>new post add page</>
+        </AuthenticateArea>
     )
 }
 
