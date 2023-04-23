@@ -42,7 +42,7 @@ const Nav = () => {
             {
                 user && (
                     <Link href={`/user/${user.username}`}>
-                        <Profile image={user.image} size={'small'} gradient={true} />
+                        <Profile image={user.image} size={'small'} gradient={false} />
                     </Link>
                 )
             }

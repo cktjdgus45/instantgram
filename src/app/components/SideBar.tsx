@@ -10,7 +10,7 @@ const SideBar = ({ user: { image, email, name, username } }: Props) => {
     return (
         <>
             <div className='flex items-center'>
-                <Profile image={image && image} size={'big'} gradient={true} />
+                <Profile image={image && image} size={'big'} gradient={false} />
                 <div className='ml-4'>
                     <p className='font-bold'>{username}</p>
                     <p className='text-lg text-neutral-500 leading-4'>{name}</p>
