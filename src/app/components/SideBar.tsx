@@ -8,7 +8,7 @@ type Props = {
 
 const SideBar = ({ user: { image, name, username } }: Props) => {
     return (
-        <>
+        <div>
             <div className='flex items-center'>
                 <Profile image={image && image} size={'big'} gradient={false} />
                 <div className='ml-4'>
@@ -18,7 +18,7 @@ const SideBar = ({ user: { image, name, username } }: Props) => {
             </div>
             <p className='text-sm text-neutral-500 mt-8'>About · Help  · Press  · API · jobs ·Privacy ·Terms ·Location ·Language</p>
             <p className='font-bold text-sm mt-8 text-neutral-500'>@Copyright INSTANTGRAM from METAL</p>
-        </>
+        </div>
     )
 }
 

@@ -1,4 +1,13 @@
-import { client } from './sanityClient'
+import { createClient } from '@sanity/client'
+
+export const client = createClient({
+    projectId: 'mw0iosgf',
+    dataset: 'production',
+    useCdn: false,
+    apiVersion: '2022-04-20',
+    token: 'skIts0irPRmDavyc4TQMCdLXQ0BfDp0Uq7TUlbaKOzsiuGv1aTJ1I1MWv5kjZmpOW133gVmre4nqNOZmBI62H1nffZsExS5FaxbW1sj1yHKKJHupOlSUcaOhejgElN35WjNjhz0DoZh8BAWqxenaifcpWHduI8bLJbzvPC3Uvh2kgOGqSZqD'
+    // Only if you want to update content with the client
+})
 
 type OAuthUser = {
     id: string;
@@ -22,7 +31,20 @@ export async function addUser({ id, username, email, image, name }: OAuthUser) {
     });
 }
 
-export async function getUser() {
-    const posts = await client.fetch('*[_type == "user"]');
-    return posts
+export async function getFollowing(query: string, id: string) {
+    const params = {
+        id
+    };
+    const following = await client.fetch(query, params);
+    return following;
+}
+export async function getSignedUserId(name: string) {
+    const Query = `*[_type == 'user'&& name == $name][0]{
+        _id
+       }`;
+    const params = {
+        name
+    };
+    const userId = await client.fetch(Query, params);
+    return userId;
 }

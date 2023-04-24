@@ -20,7 +20,7 @@ export default function RootLayout({
       <body>
         <AuthContext>
           <Header />
-          <main className='flex justify-center'>
+          <main className='box-border w-full flex justify-center'>
             {children}
           </main>
         </AuthContext>

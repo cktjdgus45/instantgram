@@ -12,12 +12,12 @@ export default async function Home() {
     redirect('/auth/signin');
   }
   return (
-    <section className='w-full flex flex-col md:flex-row max-w-[850px] p-4'>
-      <div className='w-full basis-3/4 bg-red-300'>
-        <FollowingBar />
+    <section className='w-full flex flex-col md:flex-row max-w-[850px] p-4 justify-center gap-5 mt-6'>
+      <div className='w-full basis-3/4'>
+        <FollowingBar id={user.id._id} />
         <PostList />
       </div>
-      <div className='basis-1/4 bg-blue-300'>
+      <div className='basis-1/4 '>
         <SideBar user={user} />
       </div>
     </section>
