@@ -6,7 +6,7 @@ type Props = {
     user: User;
 }
 
-const SideBar = ({ user: { image, email, name, username } }: Props) => {
+const SideBar = ({ user: { image, name, username } }: Props) => {
     return (
         <>
             <div className='flex items-center'>

@@ -21,3 +21,8 @@ export async function addUser({ id, username, email, image, name }: OAuthUser) {
         bookmarks: [],
     });
 }
+
+export async function getUser() {
+    const posts = await client.fetch('*[_type == "user"]');
+    return posts
+}
