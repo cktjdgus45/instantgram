@@ -1,5 +1,6 @@
 import Header from './components/Header';
-import AuthContext from '../context/authContext';
+import AuthContext from '../context/AuthContext';
+import SWRConfigContext from '../context/SWRConfigContext';
 import { Open_Sans } from 'next/font/google'
 import './globals.css'
 
@@ -21,7 +22,9 @@ export default function RootLayout({
         <AuthContext>
           <Header />
           <main className='box-border w-full flex justify-center'>
-            {children}
+            <SWRConfigContext>
+              {children}
+            </SWRConfigContext>
           </main>
         </AuthContext>
       </body>

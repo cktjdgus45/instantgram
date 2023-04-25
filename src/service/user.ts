@@ -31,22 +31,23 @@ export async function addUser({ id, username, email, image, name }: OAuthUser) {
     });
 }
 
-export async function getFollowing(id: string) {
-    const Query = `*[_type == 'user'&& _id ==$id][0]{following[]->
-        {username,image,_id}}`;
+export async function getFollowing(name: string) {
+    const Query = `*[_type == 'user'&& name ==$name][0]{
+        following[]->{username,image,_id}}
+        `;
     const params = {
-        id
+        name
     };
     const following = await client.fetch(Query, params);
     return following;
 }
-export async function getSignedUserId(name: string) {
-    const Query = `*[_type == 'user'&& name == $name][0]{
-        _id
+export async function getUserByName(name: string) {
+    const Query = `*[_type == 'user'&& name == "${name}"][0]{
+        ...,
+        "id":_id,
+        following[]->{username,image},
+        followers[]->{username,image},
+        "bookmarks":bookmarks[]->_id,
        }`;
-    const params = {
-        name
-    };
-    const userId = await client.fetch(Query, params);
-    return userId;
+    return client.fetch(Query);
 }

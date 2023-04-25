@@ -1,4 +1,4 @@
-import { addUser, getSignedUserId } from '@/service/user';
+import { addUser } from '@/service/user';
 import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -19,7 +19,6 @@ export const authOptions: AuthOptions = {
             if (user) {
                 session.user = {
                     ...user,
-                    id: await getSignedUserId(user.name),
                     username: user.email?.split('@')[0] || '',
                 }
             }
