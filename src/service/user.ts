@@ -31,11 +31,13 @@ export async function addUser({ id, username, email, image, name }: OAuthUser) {
     });
 }
 
-export async function getFollowing(query: string, id: string) {
+export async function getFollowing(id: string) {
+    const Query = `*[_type == 'user'&& _id ==$id][0]{following[]->
+        {username,image,_id}}`;
     const params = {
         id
     };
-    const following = await client.fetch(query, params);
+    const following = await client.fetch(Query, params);
     return following;
 }
 export async function getSignedUserId(name: string) {

@@ -1,26 +1,37 @@
 'use client';
 
 import React from 'react';
-import Profile from './ui/Profile';
-import MultiCarousel from './ui/MultiCarousel';
 import useSWR from 'swr';
 import { getFollowing } from '@/service/user';
+import MultiCarousel from './ui/MultiCarousel';
+import Profile from './ui/Profile';
+import Link from 'next/link';
 type Props = {
     id: string;
 }
+type Data = {
+    image: string;
+    username: string;
+    _id: string;
+}
+
 
 const FollowingBar = ({ id }: Props) => {
-    const query = `*[_type == 'user'&& _id ==$id][0]{following[]->{username,image,_id}}`;
-    const { data, error, isLoading } = useSWR([query, id], ([query, id]) => getFollowing(query, id));
+    const { data, error, isLoading } = useSWR(id, (id) => getFollowing(id));
     if (error) return <div>failed to load</div>;
     if (isLoading) return <div>loading...</div>;
-    console.log(error, data, query);
+    const following: Data[] = data['following'];
+    console.log(error, data);
     return (
         <section className='rounded-md shadow-md shadow-slate-300 p-3'>
-            {/* <MultiCarousel>
-                {data}
-            </MultiCarousel> */}
-            <h1>test</h1>
+            <MultiCarousel>
+                {following.map(({ image, username, _id }) => (
+                    <Link className='flex flex-col items-center' key={_id} href={`/user/${username}`}>
+                        <Profile image={image} size='big' gradient={true} />
+                        <h1>{username}</h1>
+                    </Link>
+                ))}
+            </MultiCarousel>
         </section>
     )
 }
