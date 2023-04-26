@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import useSWR from 'swr';
 import MultiCarousel from './ui/MultiCarousel';
 import Profile from './ui/Profile';
 import Link from 'next/link';
 import LoadingSpinner from './ui/LoadingSpinner';
-import { DetailUser, SimpleUser } from '@/model/user';
+import { DetailUser } from '@/model/user';
 
 
 

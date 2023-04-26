@@ -51,3 +51,18 @@ export async function getUserByName(name: string) {
        }`;
     return client.fetch(Query);
 }
+export async function getUserByFollowingName(followingName: string) {
+    const Query = `*[
+        _type == "post" 
+        && author._ref in 
+        *[_type=="user" && username=="${followingName}"]._id 
+      ]{
+        author->{username,image},
+          photo{asset},
+        likes[]->{_id},
+          comments,
+          _createdAt
+      }`
+    return client.fetch(Query);
+}
+
