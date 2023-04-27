@@ -16,7 +16,7 @@ const FollowingBar = () => {
     if (error) return <div>failed to load </div>;
     const users = data?.following;
     return (
-        <section className='rounded-md shadow-md shadow-slate-300 p-3'>
+        <section className='w-full flex justify-center items-center p-4 shadow-sm shadow-neutral-300 mb-4 rounded-lg min-h-[90px] overflow-x-auto'>
             {isLoading ? <LoadingSpinner loading={isLoading} /> : (
                 (!users || users.length === 0) && <p>{`you don't have following`}</p>)}
             {users && users.length > 0 && (

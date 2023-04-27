@@ -1,13 +1,5 @@
-import { createClient } from '@sanity/client'
+import { client } from './sanityClient';
 
-export const client = createClient({
-    projectId: 'mw0iosgf',
-    dataset: 'production',
-    useCdn: false,
-    apiVersion: '2022-04-20',
-    token: 'skIts0irPRmDavyc4TQMCdLXQ0BfDp0Uq7TUlbaKOzsiuGv1aTJ1I1MWv5kjZmpOW133gVmre4nqNOZmBI62H1nffZsExS5FaxbW1sj1yHKKJHupOlSUcaOhejgElN35WjNjhz0DoZh8BAWqxenaifcpWHduI8bLJbzvPC3Uvh2kgOGqSZqD'
-    // Only if you want to update content with the client
-})
 
 type OAuthUser = {
     id: string;
@@ -51,11 +43,11 @@ export async function getUserByName(name: string) {
        }`;
     return client.fetch(Query);
 }
-export async function getUserByFollowingName(followingName: string) {
+export async function getUserByFollowingName(followingUsername: string) {
     const Query = `*[
         _type == "post" 
         && author._ref in 
-        *[_type=="user" && username=="${followingName}"]._id 
+        *[_type=="user" && username=="${followingUsername}"]._id 
       ]{
         author->{username,image},
           photo{asset},
