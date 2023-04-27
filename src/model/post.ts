@@ -1,19 +1,22 @@
 import { SimpleUser, User } from './user';
 
 export type Comment = {
-    author: User,
-    comment: string,
-}
+    comment: string;
+    username: string;
+    image: string;
+};
 
-export type Post = {
-    author: SimpleUser,
-    photo: {
-        asset: {
-            _ref: string;
-        }
-    },
-    likes: User[] | null,
-    comments: Comment[] | null,
-    _createdAt: string;
+export type SimplePost = Omit<FullPost, 'comments'> & {
+    comments: number;
+};
 
-}
+export type FullPost = {
+    id: string;
+    username: string;
+    userImage: string;
+    image: string;
+    text: string;
+    createdAt: string;
+    likes: string[];
+    comments: Comment[];
+};
