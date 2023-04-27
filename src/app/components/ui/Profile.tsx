@@ -11,7 +11,7 @@ const Profile = ({ image, size, gradient }: Props) => {
     return (
         <div className={getContainerStyle(size, gradient)}>
             <img
-                className={`bg-contain bg-center bg-white  rounded-full ${getImageSizeStyle(size)}`}
+                className={`object-cover bg-white  rounded-full ${getImageSizeStyle(size)}`}
                 src={image ?? ''}
                 alt='profile-image'
                 referrerPolicy='no-referrer' />

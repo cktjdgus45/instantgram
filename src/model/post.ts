@@ -1,5 +1,3 @@
-import { SimpleUser, User } from './user';
-
 export type Comment = {
     comment: string;
     username: string;

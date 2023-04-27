@@ -6,7 +6,7 @@ import MultiCarousel from './ui/MultiCarousel';
 import Profile from './ui/Profile';
 import Link from 'next/link';
 import { DetailUser } from '@/model/user';
-import { GridLoader } from 'react-spinners';
+import GridSpinner from './GridSpinner';
 
 
 
@@ -17,7 +17,7 @@ const FollowingBar = () => {
     const users = data?.following;
     return (
         <section className='w-full flex justify-center items-center p-4 shadow-sm shadow-neutral-300 mb-4 rounded-lg min-h-[90px] overflow-x-auto'>
-            {isLoading ? <GridLoader color={'#FF6969'} />
+            {isLoading ? <GridSpinner />
                 : (
                     (!users || users.length === 0) && <p>{`you don't have following`}</p>)}
             {users && users.length > 0 && (
