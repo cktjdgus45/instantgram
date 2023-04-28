@@ -24,7 +24,7 @@ const PostCard = ({ post, priority }: Props) => {
     return (
         <>
             {showModal && createPortal(
-                <ModalContent comments={comments} onClose={() => setShowModal(false)} />,
+                <ModalContent post={post} onClose={() => setShowModal(false)} />,
                 document.body
             )}
             <div onClick={onPostClick} key={username} className='flex flex-col w-full rounded-md shadow-md shadow-slate-300 mt-6'>
