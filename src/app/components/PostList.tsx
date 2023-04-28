@@ -3,11 +3,11 @@
 import React from 'react';
 import useSWR from 'swr';
 import PostCard from './PostCard';
-import { SimplePost } from '@/model/post';
+import { FullPost } from '@/model/post';
 import GridSpinner from './GridSpinner';
 
 const PostList = () => {
-    const { data: posts, isLoading: loading } = useSWR<SimplePost[]>('/api/posts');
+    const { data: posts, isLoading: loading } = useSWR<FullPost[]>('/api/posts');
     return (
         <>
             {loading && (
