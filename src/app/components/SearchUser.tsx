@@ -2,16 +2,15 @@
 
 import React, { useState } from 'react';
 import useSWR from 'swr';
-import { FullPost } from '@/model/post';
 import { SearchUser } from '@/model/user';
 import LoadingSpinner from './ui/LoadingSpinner';
-import Profile from './ui/Profile';
-import Link from 'next/link';
 import SearchUserCard from './SearchUserCard';
+import useDebounce from '@/hooks/debounce';
 
 const SearchUser = () => {
     const [query, setQuery] = useState('');
-    const { data: users, isLoading } = useSWR<SearchUser[]>(`/api/search/${query}`);
+    const debouncedQuery = useDebounce(query);
+    const { data: users, isLoading } = useSWR<SearchUser[]>(`/api/search/${debouncedQuery}`);
     return (
         <section className='flex flex-col items-center w-3/4'>
             <input
