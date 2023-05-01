@@ -1,6 +1,5 @@
 import { client } from './sanityClient';
 
-
 type OAuthUser = {
     id: string;
     name: string;
@@ -55,6 +54,29 @@ export async function getUserByFollowingName(followingUsername: string) {
           comments,
           _createdAt
       }`
+    return client.fetch(Query);
+}
+
+export async function getUsersByName(keyword: string) {
+    const Query = `*[_type == 'user' && (name match "${keyword}" || username match "${keyword}" )]{
+        "id":_id,
+        name,
+        username,
+        image,
+                "followings":count(following[]),
+        "followers" : count(followers[]),
+       }`;
+    return client.fetch(Query);
+}
+export async function getUsers() {
+    const Query = `*[_type == 'user']{
+        "id":_id,
+        name,
+        username,
+        image,
+        "followings":count(following[]),
+        "followers" : count(followers[]),
+       }`;
     return client.fetch(Query);
 }
 

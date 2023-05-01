@@ -6,7 +6,7 @@ import { SWRConfig } from 'swr';
 const authContext = ({ children }: { children: React.ReactNode }) => {
     return (
         <SWRConfig value={{
-            fetcher: (url: string) => fetch(url).then((res) => res.json())
+            fetcher: (url) => fetch(url).then((res) => res.json())
         }}>
             {children}
         </SWRConfig>
