@@ -63,7 +63,7 @@ export async function getUsersByName(keyword: string) {
         name,
         username,
         image,
-                "followings":count(following[]),
+        "followings":count(following[]),
         "followers" : count(followers[]),
        }`;
     return client.fetch(Query);
@@ -80,3 +80,15 @@ export async function getUsers() {
     return client.fetch(Query);
 }
 
+export async function getPostUserByUsername(username: string, authUserEmail: string) {
+    const Query = `*[_type == 'user' && username match '${username}'][0]{
+        name,
+        username,
+        image,
+        "following":count(following[]),
+        "followers":count(followers[]),
+        "isFollower" : "${authUserEmail}" in *[references(followers[]._ref)].email,
+        "posts" : count(*[_type == 'post' && author->username =='anna' ])
+       }`
+    return client.fetch(Query);
+}

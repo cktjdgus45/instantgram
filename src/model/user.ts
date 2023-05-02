@@ -12,6 +12,12 @@ export type SearchUser = Pick<User, 'username' | 'image' | 'name'>
         followers: number;
         followings: number;
     };
+export type PostUser = Pick<User, 'username' | 'image' | 'name'> & {
+    following: number,
+    followers: number,
+    posts: number,
+    isFollower: boolean,
+}
 
 
 export type DetailUser = User & {
