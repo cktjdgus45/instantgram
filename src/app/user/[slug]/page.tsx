@@ -1,6 +1,12 @@
 import OwnerInfo from '@/app/components/OwnerInfo';
 import OwnerPost from '@/app/components/OwnerPost';
 import React from 'react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'User | Page',
+    description: 'user page',
+}
 
 type Context = {
     params: {
