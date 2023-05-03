@@ -16,12 +16,18 @@ const OwnerInfo = ({ ownerName }: Props) => {
     const { data: session } = useSession();
     const loggedUser = session?.user.name;
     return (
-        <section className='w-full flex items-center justify-center p-4'>
-            {loading && <LoadingSpinner loading={loading}></LoadingSpinner>}
-            {user && loggedUser &&
-                (<UserBadge user={user} loggedUser={loggedUser} />)
-            }
-        </section>
+        <>
+            {loading && (
+                <div className='w-full flex justify-center mt-10'>
+                    <LoadingSpinner loading={loading} />
+                </div>
+            )}
+            <section className='w-full flex items-center justify-center p-4'>
+                {user && loggedUser &&
+                    (<UserBadge user={user} loggedUser={loggedUser} />)
+                }
+            </section>
+        </>
     )
 }
 export default OwnerInfo;
