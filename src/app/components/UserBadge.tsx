@@ -7,7 +7,7 @@ import Profile from './ui/Profile';
 
 type Props = {
     user: PostUser;
-    loggedUser: string;
+    loggedUser: string | null;
 }
 
 const UserBadge = ({ user, loggedUser }: Props) => {
@@ -19,7 +19,7 @@ const UserBadge = ({ user, loggedUser }: Props) => {
                 <div className='flex items-center'>
                     <p className='mr-3 text-base'>{username}</p>
                     {
-                        loggedUser === name ? null :
+                        loggedUser === name || loggedUser === null ? null :
                             <CheckFollowerButton isFollower={isFollower} />
                     }
                 </div>

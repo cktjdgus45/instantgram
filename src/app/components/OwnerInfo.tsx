@@ -23,8 +23,8 @@ const OwnerInfo = ({ ownerName }: Props) => {
                 </div>
             )}
             <section className='w-full flex items-center justify-center p-4'>
-                {user && loggedUser &&
-                    (<UserBadge user={user} loggedUser={loggedUser} />)
+                {user &&
+                    (<UserBadge user={user} loggedUser={loggedUser ?? null} />)
                 }
             </section>
         </>
