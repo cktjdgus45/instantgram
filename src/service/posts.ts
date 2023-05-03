@@ -28,3 +28,39 @@ export async function getFollowingPostsOf(username: string) {
             posts.map((post: FullPost) => ({ ...post, image: urlFor(post.image) }))
         );
 }
+
+export async function getMyPost(username: string) {
+    const Query = `*[_type =="post"
+    && author->username == "${username}"]
+    {
+      ${simplePostProjection}
+    }`;
+    return client.fetch(Query)
+        .then(
+            (posts: FullPost[]) =>
+                posts.map((post: FullPost) => ({ ...post, image: urlFor(post.image) }))
+        );
+}
+export async function getBookmarkedPost(username: string) {
+    const Query = ` *[_type =="user"&&username == "${username}"][0]
+    {
+       "bookmarks" : bookmarks[]->{
+        ${simplePostProjection}
+       }
+    }`;
+    return client.fetch(Query)
+        .then(
+            (data) =>
+                data['bookmarks'].map((bookmark: FullPost) => ({ ...bookmark, image: urlFor(bookmark.image) }))
+        );
+}
+export async function getLikedPost(username: string) {
+    const Query = `*[_type == "post" && "${username}" in likes[]->username]
+                {
+                    ${simplePostProjection}
+                }`;
+    return client.fetch(Query).then(
+        (posts: FullPost[]) =>
+            posts.map((post: FullPost) => ({ ...post, image: urlFor(post.image) }))
+    );
+}

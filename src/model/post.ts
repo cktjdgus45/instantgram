@@ -1,3 +1,5 @@
+export type Category = "posts" | "saved" | "liked";
+
 export type Comment = {
     author: {
         id: string;
