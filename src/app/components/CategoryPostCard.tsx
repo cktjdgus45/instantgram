@@ -5,6 +5,7 @@ import { FullPost } from '@/model/post';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import ModalContent from './ModalContent';
+import AuthenticateArea from './AuthenticateArea';
 
 type Props = {
     post: FullPost;
@@ -19,7 +20,10 @@ const CategoryPostCard = ({ post, priority }: Props) => {
     return (
         <>
             {showModal && createPortal(
-                <ModalContent post={post} onClose={() => setShowModal(false)} />,
+                <AuthenticateArea>
+                    <ModalContent post={post} onClose={() => setShowModal(false)} />
+                </AuthenticateArea>
+                ,
                 document.body
             )}
             <li onClick={onPostClick} className='h-[500px]'>

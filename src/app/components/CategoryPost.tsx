@@ -24,7 +24,7 @@ const CategoryPost = ({ category, ownerName }: Props) => {
                 <ul className='grid grid-cols-3 grid-rows-3 w-full h-full gap-3 mt-3'>
                     {posts.map((post, index) => (
                         <>
-                            <CategoryPostCard key={post.id} post={post} priority={index < 2} />
+                            <CategoryPostCard key={index} post={post} priority={index < 2} />
                         </>
                     ))}
                 </ul>
