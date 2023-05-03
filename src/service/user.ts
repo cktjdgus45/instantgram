@@ -88,7 +88,7 @@ export async function getPostUserByUsername(username: string, authUserEmail: str
         "following":count(following[]),
         "followers":count(followers[]),
         "isFollower" : "${authUserEmail}" in *[references(followers[]._ref)].email,
-        "posts" : count(*[_type == 'post' && author->username =='anna' ])
+        "posts" : count(*[_type == 'post' && author->username =='${username}' ])
        }`
     return client.fetch(Query);
 }
