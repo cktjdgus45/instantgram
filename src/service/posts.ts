@@ -25,7 +25,7 @@ export async function getFollowingPostsOf(username: string) {
         }`
         )
         .then((posts: FullPost[]) =>
-            posts.map((post: FullPost) => ({ ...post, image: urlFor(post.image) }))
+            posts.map((post: FullPost) => ({ ...post, image: urlFor(post.image), likes: post.likes ?? [] }))
         );
 }
 
@@ -67,18 +67,21 @@ export async function getLikedPost(username: string) {
 
 export async function likePost(postId: string, userId: string) {
     return client
-        .patch(postId)
+        .patch(postId) //
         .setIfMissing({ likes: [] })
         .append('likes', [
             {
                 _ref: userId,
-                _type: '_reference'
-            }
+                _type: 'reference',
+            },
         ])
-        .commit({ autoGenerateArrayKeys: true })
+        .commit({ autoGenerateArrayKeys: true });
 }
-export async function unLikePost(postId: string, userId: string) {
-    return client.patch(postId)
+
+export async function dislikePost(postId: string, userId: string) {
+    return client
+        .patch(postId)
         .unset([`likes[_ref=="${userId}"]`])
         .commit();
 }
+

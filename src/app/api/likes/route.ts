@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { authOptions } from '../../../../pages/api/auth/[...nextauth]';
 import { client } from '@/service/sanityClient';
-import { likePost, unLikePost } from '@/service/posts';
+import { likePost, dislikePost } from '@/service/posts';
 
 export async function PUT(req: NextRequest) {
     const session = await getServerSession(authOptions);
@@ -10,13 +10,11 @@ export async function PUT(req: NextRequest) {
     if (!user) {
         return new Response('Authenticate Error', { status: 401 });
     }
-
     const { id, like } = await req.json();
-
     if (!id || like === undefined) {
         return new Response('Bad Request', { status: 400 });
     }
-    const request = like ? likePost : unLikePost;
+    const request = like ? likePost : dislikePost;
     return request(id, user.id)
         .then(res => NextResponse.json(res))
         .catch((error) => new Response(JSON.stringify(error), { status: 500 }))

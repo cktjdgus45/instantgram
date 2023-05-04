@@ -13,7 +13,7 @@ type Props = {
 }
 
 const ModalContent = ({ onClose, post }: Props) => {
-    const { userImage, username, image, createdAt, likes, comments } = post;
+    const { userImage, username, image, createdAt, likes, comments, id, text } = post;
     return (
         <div className="fixed z-[99999] inset-0 bg-black bg-opacity-70 flex justify-center items-center">
             <main className='w-9/12 flex'>
@@ -30,7 +30,9 @@ const ModalContent = ({ onClose, post }: Props) => {
                     </div>
                     <Comments comments={comments} />
                     <div className='p-2'>
-                        <ActionBar likes={likes}
+                        <ActionBar
+                            id={id}
+                            likes={likes}
                             username={username}
                             createdAt={createdAt} />
                         <CommentForm />
