@@ -16,7 +16,7 @@ type Props = {
 };
 
 const PostCard = ({ post, priority }: Props) => {
-    const { userImage, username, image, createdAt, likes, text, comments, id } = post;
+    const { userImage, username, image } = post;
     const [showModal, setShowModal] = useState(false);
     const onPostClick = () => {
         setShowModal(true);
@@ -39,11 +39,7 @@ const PostCard = ({ post, priority }: Props) => {
                     alt={`photo by ${username}`}
                     priority={priority} />
                 <div className='p-2'>
-                    <ActionBar likes={likes}
-                        username={username}
-                        text={text}
-                        createdAt={createdAt}
-                        id={id} />
+                    <ActionBar post={post} />
                     <CommentForm />
                 </div>
             </div>

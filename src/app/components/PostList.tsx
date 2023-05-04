@@ -1,13 +1,12 @@
 'use client';
 
 import React from 'react';
-import useSWR from 'swr';
 import PostCard from './PostCard';
-import { FullPost } from '@/model/post';
 import GridSpinner from './GridSpinner';
+import usePosts from '@/hooks/posts';
 
 const PostList = () => {
-    const { data: posts, isLoading: loading } = useSWR<FullPost[]>('/api/posts');
+    const { posts, isLoading: loading } = usePosts();
     return (
         <>
             {loading && (

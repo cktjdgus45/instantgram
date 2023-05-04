@@ -9,27 +9,24 @@ import HeartFillIcon from './ui/icons/HeartFillIcon';
 import BookmarkFillIcon from './ui/icons/BookmarkFillIcon';
 import { useSession } from 'next-auth/react';
 import { useSWRConfig } from 'swr';
+import usePosts from '@/hooks/posts';
+import { FullPost } from '@/model/post';
 
 type Props = {
-    id: string;
-    likes: string[];
-    username: string;
-    text?: string;
-    createdAt: string;
+    post: FullPost;
 }
 
-const ActionBar = ({ likes, username, text, createdAt, id }: Props) => {
+const ActionBar = ({ post }: Props) => {
+    const { likes, username, text, createdAt, id } = post;
     const { data: session } = useSession();
     const user = session?.user;
     const liked = user ? likes.includes(user.username) : false;
-    const { mutate } = useSWRConfig();
     const [bookmarked, setBookmarked] = useState(false);
+    const { setLike } = usePosts();
     const handleLike = (like: boolean) => {
-        console.log(like, id);
-        fetch('api/likes', {
-            method: 'PUT',
-            body: JSON.stringify({ id, like })
-        }).then(() => mutate('/api/posts'))
+        if (user) {
+            setLike(post, user.username, like);
+        }
     }
     return (
         <>
