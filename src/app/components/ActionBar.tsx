@@ -1,7 +1,12 @@
-import React from 'react';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { BsBookmark } from 'react-icons/bs';
+'use client';
+
+import React, { useState } from 'react';
 import { parseDate } from '@/util/date';
+import HeartIcon from './ui/icons/HeartIcon';
+import BookmarkIcon from './ui/icons/BookmarkIcon';
+import ToggleButton from './ui/ToggleButton';
+import HeartFillIcon from './ui/icons/HeartFillIcon';
+import BookmarkFillIcon from './ui/icons/BookmarkFillIcon';
 
 type Props = {
     likes: string[];
@@ -11,11 +16,13 @@ type Props = {
 }
 
 const ActionBar = ({ likes, username, text, createdAt }: Props) => {
+    const [liked, setLiked] = useState(false);
+    const [bookmarked, setBookmarked] = useState(false);
     return (
         <>
             <div className='flex justify-between items-center'>
-                <AiOutlineHeart className='w-7 h-7' />
-                <BsBookmark className='w-7 h-7' />
+                <ToggleButton toggled={liked} onToggle={setLiked} onIcon={<HeartFillIcon />} offIcon={<HeartIcon />} />
+                <ToggleButton toggled={bookmarked} onToggle={setBookmarked} onIcon={<BookmarkFillIcon />} offIcon={<BookmarkIcon />} />
             </div>
             <p className='p-2 text-sm font-bold'>{likes ? `${likes?.length}likes` : '0 like'}</p>
             {text && (<p className='p-2 text-sm'>{`${username} ${text}`}</p>)}

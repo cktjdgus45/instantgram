@@ -27,12 +27,12 @@ const PostCard = ({ post, priority }: Props) => {
                 <ModalContent post={post} onClose={() => setShowModal(false)} />,
                 document.body
             )}
-            <div onClick={onPostClick} key={username} className='flex flex-col w-full rounded-md shadow-md shadow-slate-300 mt-6'>
+            <div key={username} className='flex flex-col w-full rounded-md shadow-md shadow-slate-300 mt-6'>
                 <div className='w-full justify-start flex items-center p-2'>
                     <Profile image={userImage} size='small' gradient={true} />
                     <h4 className='text-base font-bold ml-2'>{username}</h4>
                 </div>
-                <Image className='w-auto h-auto aspect-auto'
+                <Image onClick={onPostClick} className='w-auto h-auto aspect-auto'
                     width={590}
                     height={400}
                     src={image}
