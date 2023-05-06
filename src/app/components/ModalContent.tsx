@@ -31,10 +31,7 @@ const ModalContent = ({ onClose, post }: Props) => {
                     <Comments comments={comments} />
                     <div className='p-2'>
                         <ActionBar
-                            id={id}
-                            likes={likes}
-                            username={username}
-                            createdAt={createdAt} />
+                            post={post} />
                         <CommentForm />
                     </div>
                 </section>
